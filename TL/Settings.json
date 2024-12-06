@@ -1,0 +1,22 @@
+{
+    "packStructureVersion": 26,
+    "title": "Loot Beam",
+    "guid": "dddbc336-16a7-48dc-8316-e563d3a1fb84",
+    "authors": [
+        {
+            "file": "1.webp",
+            "name": "Eternal01",
+            "color": "#ff303f9f",
+            "link": "",
+            "icon_height": 70
+        },
+        {
+            "file": "2.png",
+            "name": "ChemAtDark | Assets",
+            "color": "#ff00796b",
+            "link": "https://github.com/Nobelium-Uranium/LootBeams",
+            "icon_height": 70
+        }
+    ],
+    "version": 1
+}
