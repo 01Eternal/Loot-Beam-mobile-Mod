@@ -1,28 +1,31 @@
-import { using } from './ModClasses.js'
+import { using } from "./ModClasses.js";
 
-using('Terraria')
-using('Terraria.GameContent')
-using('Microsoft.Xna.Framework')
-using('Microsoft.Xna.Framework.Graphics')
+using("Terraria");
+using("Terraria.GameContent");
+using("Microsoft.Xna.Framework");
+using("Microsoft.Xna.Framework.Graphics");
 
-const Draw = SpriteBatch['void Draw(Texture2D texture, Rectangle destinationRectangle, Color color)'];
-const Color_Op_Multiply = Color['Color op_Multiply(Color a, float amount)'];
+const Draw =
+    SpriteBatch[
+        "void Draw(Texture2D texture, Rectangle destinationRectangle, Color color)"
+    ];
+const Color_Op_Multiply = Color["Color op_Multiply(Color a, float amount)"];
 
 function drawTexture(texture, position, color, rotation, origin, scale) {
     Main.spriteBatch[
-        'void Draw(Texture2D texture, Vector2 position, Nullable`1 sourceRectangle, Color color, float rotation, Vector2 origin, float scale, SpriteEffects effects, float layerDepth)'
+        "void Draw(Texture2D texture, Vector2 position, Nullable`1 sourceRectangle, Color color, float rotation, Vector2 origin, float scale, SpriteEffects effects, float layerDepth)"
     ](texture, position, null, color, rotation, origin, scale, null, 0.0);
 }
 
-import { ModTexture } from './ModTexture.js';
+import { ModTexture } from "./ModTexture.js";
 
-let SimpleBeam = '';
-let Center = '';
-let SimpleGlow = '';
+let SimpleBeam = "";
+let Center = "";
+let SimpleGlow = "";
 
 Main.Initialize_AlmostEverything.hook((original, self) => {
     original(self);
-    
+
     SimpleBeam = new ModTexture(`SimpleBeam`).asset.asset.Value;
     Center = new ModTexture(`Center`).asset.asset.Value;
     SimpleGlow = new ModTexture(`SimpleGlow`).asset.asset.Value;
@@ -46,20 +49,34 @@ function rectangle(x, y, width, height) {
 
 function getRarityColor(rare) {
     switch (rare) {
-        case -1: return Color.Gray;
-        case 0: return Color.White;
-        case 1: return Color.Blue;
-        case 2: return Color.Green;
-        case 3: return Color.Orange;
-        case 4: return Color.Red;
-        case 5: return Color.Pink;
-        case 6: return Color.LightPurple;
-        case 7: return Color.Lime;
-        case 8: return Color.Yellow;
-        case 9: return Color.Cyan;
-        case 10: return Color.Red;
-        case 11: return Color.Purple;
-        default: return Color.White;
+        case -1:
+            return Color.Gray;
+        case 0:
+            return Color.White;
+        case 1:
+            return Color.Blue;
+        case 2:
+            return Color.Green;
+        case 3:
+            return Color.Orange;
+        case 4:
+            return Color.Red;
+        case 5:
+            return Color.Pink;
+        case 6:
+            return Color.LightPurple;
+        case 7:
+            return Color.Lime;
+        case 8:
+            return Color.Yellow;
+        case 9:
+            return Color.Cyan;
+        case 10:
+            return Color.Red;
+        case 11:
+            return Color.Purple;
+        default:
+            return Color.White;
     }
 }
 
@@ -67,12 +84,12 @@ let opacityCycle = 0;
 
 function getOpacity() {
     const cycleValue = Math.sin(opacityCycle * Math.PI);
-    return 0.5 + (cycleValue * 0.15);
+    return 0.5 + cycleValue * 0.15;
 }
 
 Player.UpdateEquips.hook((orig, self, i) => {
     orig(self, i);
-    opacityCycle += 0.05; 
+    opacityCycle += 0.05;
 });
 
 Main.DrawItems.hook((orig, self) => {
@@ -96,37 +113,37 @@ Main.DrawItems.hook((orig, self) => {
                 getOrigin(6, 144),
                 0.75
             );
-            
+
             if (item.damage > 0) {
-            drawTexture(
-                Center,
-                vector(centerX, centerY),
-                Color_Op_Multiply(rarityColor, opacity),
-                0,
-                getOrigin(20, 20),
-                4 + item.Widht 
-            );
+                drawTexture(
+                    Center,
+                    vector(centerX, centerY),
+                    Color_Op_Multiply(rarityColor, opacity),
+                    0,
+                    getOrigin(20, 20),
+                    4 + item.Widht
+                );
             } else {
-            drawTexture(
-                Center,
-                vector(centerX, centerY),
-                Color_Op_Multiply(rarityColor, opacity),
-                0,
-                getOrigin(20, 20),
-                1 + item.Widht 
-            );
+                drawTexture(
+                    Center,
+                    vector(centerX, centerY),
+                    Color_Op_Multiply(rarityColor, opacity),
+                    0,
+                    getOrigin(20, 20),
+                    1 + item.Widht
+                );
             }
-            
+
             drawTexture(
                 SimpleGlow,
                 vector(centerX, centerY),
                 Color_Op_Multiply(rarityColor, opacity),
                 0,
                 getOrigin(150, 150),
-                0.35 
+                0.35
             );
         }
     });
 
     orig(self);
-})
+});
