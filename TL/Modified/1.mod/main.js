@@ -1,17 +1,9 @@
-const ChatCommandProcessor = new NativeClass('Terraria.Chat', 'ChatCommandProcessor');
-const ChatManager = new NativeClass('Terraria.UI.Chat', 'ChatManager');
-const Main = new NativeClass('Terraria', 'Main');
-const GameCulture = new NativeClass('Terraria.Localization', 'GameCulture');
-const Vector2 = new NativeClass('Microsoft.Xna.Framework', 'Vector2');
-const NPC = new NativeClass('Terraria', 'NPC');
-const Color = new NativeClass('Microsoft.Xna.Framework.Graphics', 'Color');
-const FontAssets = new NativeClass('Terraria.GameContent', 'FontAssets');
-const SpriteBatch = new NativeClass('Microsoft.Xna.Framework.Graphics', 'SpriteBatch');
-const TextureAssets = new NativeClass('Terraria.GameContent', 'TextureAssets');
-const Rectangle = new NativeClass('Microsoft.Xna.Framework', 'Rectangle');
-const Utils = new NativeClass('Terraria', 'Utils');
+import { using } from './ModClasses.js'
 
-const Player = new NativeClass ('Terraria', 'Player');
+using('Terraria')
+using('Terraria.GameContent')
+using('Microsoft.Xna.Framework')
+using('Microsoft.Xna.Framework.Graphics')
 
 const Draw = SpriteBatch['void Draw(Texture2D texture, Rectangle destinationRectangle, Color color)'];
 const Color_Op_Multiply = Color['Color op_Multiply(Color a, float amount)'];
@@ -137,4 +129,4 @@ Main.DrawItems.hook((orig, self) => {
     });
 
     orig(self);
-});
+})
