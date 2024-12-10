@@ -1,6 +1,7 @@
 import { using } from "./ModClasses.js";
 
 using("Terraria");
+using("Terraria.ID");
 using("Terraria.GameContent");
 using("Microsoft.Xna.Framework");
 using("Microsoft.Xna.Framework.Graphics");
@@ -62,7 +63,7 @@ function getRarityColor(rare) {
         case 4:
             return Color.Red;
         case 5:
-            return Color.Pink;
+            return Colors.RarityPink;
         case 6:
             return Color.LightPurple;
         case 7:
